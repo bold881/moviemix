@@ -1,0 +1,15 @@
+.gradle
+.idea
+build
+bin
+.classpath
+.settings
+.project
+target
+out
+.springBeans
+*.rdb
+!eclispe/.checkstyle
+.checkstyle
+.pyc
+/images
