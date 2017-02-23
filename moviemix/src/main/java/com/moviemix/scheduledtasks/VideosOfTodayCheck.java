@@ -10,6 +10,8 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 import com.moviemix.service.MovieMixEmailService;
+import com.moviemix.service.SubscriberService;
+import com.moviemix.service.VideoService;
 
 @Component
 public class VideosOfTodayCheck {
@@ -17,14 +19,20 @@ public class VideosOfTodayCheck {
 	@Autowired
 	MovieMixEmailService movieMixEmailService;
 	
+	@Autowired
+	VideoService videoService;
+	
+	@Autowired
+	SubscriberService subscriberService;
+	
     //private static final Logger log = LoggerFactory.getLogger(VideosOfTodayCheck.class);
 
     //private static final SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
 
-    //@Scheduled(fixedRate = 5000)
+    @Scheduled(cron="0 10 23 * * ?")
     public void reportCurrentTime() {
-    	this.movieMixEmailService.sendFreshVideoEmail("2243675357@qq.com", null);
-    	//log.info("The time is now {}", dateFormat.format(new Date()));
+    	this.movieMixEmailService.sendFreshVideoEmail(this.subscriberService.getSubscribers(), 
+    			this.videoService.listTodayVideos());
     }
 	
 }

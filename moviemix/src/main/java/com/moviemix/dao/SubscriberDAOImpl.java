@@ -13,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.moviemix.model.Subscriber;
 
 @Repository
+@Transactional
 public class SubscriberDAOImpl implements SubscriberDAO {
 
 	@Autowired
@@ -22,7 +23,6 @@ public class SubscriberDAOImpl implements SubscriberDAO {
 			LoggerFactory.getLogger(SubscriberDAOImpl.class);
 	
 	@Override
-	@Transactional
 	public void addSubscriber(Subscriber s) {
 		Session session = sessionFactory.getCurrentSession();
 		session.persist(s);

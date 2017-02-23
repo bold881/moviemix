@@ -25,7 +25,7 @@ public class Video {
 	@NotNull
 	@Column(name="downloadurl")
 	private String downloadurl;
-	
+
 	@Column(name="created")
 	private Date created;
 	
@@ -105,6 +105,11 @@ public class Video {
 
 	public void setInfo(String info) {
 		this.info = info;
+	}
+	
+	@Override
+	public String toString() {
+		return this.title + this.created + '\n';
 	}
 
 }
