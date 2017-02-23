@@ -21,7 +21,7 @@ public class VideosOfTodayCheck {
 
     //private static final SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
 
-    @Scheduled(fixedRate = 5000)
+    //@Scheduled(fixedRate = 5000)
     public void reportCurrentTime() {
     	this.movieMixEmailService.sendFreshVideoEmail("2243675357@qq.com", null);
     	//log.info("The time is now {}", dateFormat.format(new Date()));
