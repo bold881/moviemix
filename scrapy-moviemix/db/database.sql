@@ -22,3 +22,25 @@ CREATE TABLE `videos` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `pageurl` (`pageurl`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE `videolite` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `title` varchar(255) DEFAULT NULL,
+  `downloadurl` varchar(255) DEFAULT NULL,
+  `created` datetime DEFAULT NULL,
+  `domain` varchar(80) DEFAULT NULL,
+  `pageurl` varchar(255) DEFAULT NULL,
+  `info` text,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `pageurl` (`pageurl`)
+) ENGINE=InnoDB AUTO_INCREMENT=7102 DEFAULT CHARSET=utf8;
+
+CREATE TABLE `subscriber` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `nickname` varchar(50) NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `created` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `email` (`email`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+
