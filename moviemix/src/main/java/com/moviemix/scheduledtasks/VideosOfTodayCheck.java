@@ -29,10 +29,15 @@ public class VideosOfTodayCheck {
 
     //private static final SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
 
-    @Scheduled(cron="0 10 23 * * ?")
+    //@Scheduled(cron="0 0 20 * * ?")
     public void reportCurrentTime() {
     	this.movieMixEmailService.sendFreshVideoEmail(this.subscriberService.getSubscribers(), 
     			this.videoService.listTodayVideos());
     }
 	
+    @Scheduled(cron="0 0 20 * * ?")
+    public void reportRichCurrentTime() {
+    	this.movieMixEmailService.sendRichFreshVideoEmail(this.subscriberService.getSubscribers(), 
+    			this.videoService.listTodayVideos());
+    }
 }

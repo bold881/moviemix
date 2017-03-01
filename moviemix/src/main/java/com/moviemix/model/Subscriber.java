@@ -12,6 +12,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
 @Table(name="subscriber")
@@ -27,8 +28,9 @@ public class Subscriber {
 	@Column(name="nickname")
 	private String nickname;
 	
-	@NotNull
-	@Email
+	
+	@NotEmpty @Email
+	@Column(name="email")
 	private String email;
 	
 	@Column(name="created")

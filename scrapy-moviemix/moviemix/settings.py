@@ -94,9 +94,12 @@ ITEM_PIPELINES = {
 #HTTPCACHE_STORAGE = 'scrapy.extensions.httpcache.FilesystemCacheStorage'
 
 #Mysql数据库的配置信息
-MYSQL_HOST = "10.115.0.29"
-MYSQL_USER = "df"
-MYSQL_PSWD = "123456"
+#MYSQL_HOST = "10.115.0.29"
+#MYSQL_USER = "df"
+#MYSQL_PSWD = "123456"
+MYSQL_HOST = "localhost"
+MYSQL_USER = "root"
+MYSQL_PSWD = "root"
 MYSQL_DBNAME = "moviemix"
 MYSQL_CHARSET = "utf8"
 MYSQL_UNICODE = True         

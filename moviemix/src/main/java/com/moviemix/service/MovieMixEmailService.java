@@ -10,4 +10,6 @@ public interface MovieMixEmailService {
 	public abstract void sendFreshVideoEmail(String to, List<Video> lstVideos);
 	
 	public abstract void sendFreshVideoEmail(List<Subscriber> lstSubscribers, List<Video> lstVideos);
+	
+	public abstract void sendRichFreshVideoEmail(List<Subscriber> lstSubscribers, List<Video> lstVideos);
 }

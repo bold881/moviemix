@@ -1,13 +1,16 @@
 package com.moviemix.controller;
 
+import java.sql.SQLException;
 import java.util.Date;
 
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.Errors;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -44,7 +47,8 @@ public class AppController {
 	}
 	
 	@RequestMapping(value="/subscribe", method=RequestMethod.GET)
-	public String subscribeEmail() {
+	public String subscribeEmail(ModelMap model) {
+		model.addAttribute(new Subscriber());
 		return "subscribe";
 	}
 	
@@ -65,5 +69,10 @@ public class AppController {
 		this.subscriberService.addSubscriber(subscriber);
 		return "redirect:/subscribeok";
 		
+	}
+	
+	@ExceptionHandler({SQLException.class,DataAccessException.class})
+	public String databaseError() {
+		return "error";
 	}
 }

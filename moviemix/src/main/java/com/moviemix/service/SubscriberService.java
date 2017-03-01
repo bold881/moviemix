@@ -9,4 +9,6 @@ public interface SubscriberService {
 	public void addSubscriber(Subscriber s);
 	
 	public List<Subscriber> getSubscribers();
+	
+	//public void removeSubscriber(Subscriber s);
 }
