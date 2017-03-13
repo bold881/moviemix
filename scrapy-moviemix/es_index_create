@@ -1,0 +1,30 @@
+PUT moviemix 
+{
+  "mappings": {
+    "movie": { 
+      "_all":       { "enabled": false  }, 
+      "properties": {
+        "id": {
+          "type": "long"
+        }, 
+        "title":    { 
+          "type": "text",
+          "analyzer": "ik_max_word"
+          }, 
+        "downloadurl": {
+          "type": "text",
+          "analyzer": "ik_max_word"
+        },
+        "created":     { 
+            "type": "date"
+        }, 
+        "domain":      { "type": "text" },
+        "pageurl": {"type": "text"},
+        "info": {
+          "type": "text",
+          "analyzer": "ik_max_word"
+        }
+      }
+    }
+  }
+}

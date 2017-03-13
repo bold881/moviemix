@@ -102,6 +102,8 @@ MYSQL_USER = "root"
 MYSQL_PSWD = "root"
 MYSQL_DBNAME = "moviemix"
 MYSQL_CHARSET = "utf8"
-MYSQL_UNICODE = True         
+MYSQL_UNICODE = True
+
+ES_HOST = "0.0.0.0"
 
 COMMANDS_MODULE = 'moviemix.commands'

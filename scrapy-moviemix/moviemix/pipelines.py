@@ -11,6 +11,7 @@ import datetime
 
 from scrapy.conf import settings
 from moviemix.items import VideoLiteItem
+from elasticsearch import Elasticsearch
 
 
 
@@ -25,6 +26,11 @@ class MysqlDBPipeline(object):
             use_unicode=settings['MYSQL_UNICODE']
         )
         self.cursor = self.conn.cursor()
+        # connect esclient
+        self.es = Elasticsearch([
+            {'host': settings['ES_HOST']}
+        ])
+
     add_newsitem = ("INSERT INTO videolite "
     "(title, downloadurl, created, domain, pageurl, info) "
     "VALUES (%s, %s, %s, %s, %s, %s)")
@@ -57,6 +63,20 @@ class MysqlDBPipeline(object):
 
                 self.cursor.execute(self.add_newsitem, data_newsitem)
                 self.conn.commit()
+
             except MySQLdb.Error, e:
                 print "DB Error %d: %s" % (e.args[0], e.args[1])
+
+            # index document
+            tses = datetime.datetime.fromtimestamp(ts).strftime('%Y-%m-%dT%H:%M:%SZ')
+            doc = {
+                'id': self.cursor.lastrowid,
+                'title': item.get('title', ''),
+                'downloadurl': item.get('downloadurl', ''),
+                'created': tses, # date datatype can be formatted when index time
+                'domain': item.get('domain', ''),
+                'pageurl': item.get('pageurl', ''),
+                'info': item.get('info', ''),
+            }
+            self.es.index(index="moviemix", doc_type='movie', body=doc)
         return item
