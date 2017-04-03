@@ -11,9 +11,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.moviemix.model.SearchKeyword;
 import com.moviemix.model.Subscriber;
 import com.moviemix.service.SubscriberService;
 import com.moviemix.service.VideoService;
@@ -74,5 +78,16 @@ public class AppController {
 	@ExceptionHandler({SQLException.class,DataAccessException.class})
 	public String databaseError() {
 		return "error";
+	}
+	
+	@GetMapping("/search")
+	public String processSearch(ModelMap model) {
+		model.addAttribute(new SearchKeyword());
+		return "search";
+	}
+	
+	@PostMapping("/search")
+	public String doSearch(@ModelAttribute SearchKeyword searchKeyword) {
+		return "search";
 	}
 }

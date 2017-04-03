@@ -10,7 +10,7 @@ import time
 import datetime
 
 from scrapy.conf import settings
-from moviemix.items import VideoLiteItem
+from moviemix.items import VideoItem
 from elasticsearch import Elasticsearch
 
 
@@ -31,16 +31,17 @@ class MysqlDBPipeline(object):
             {'host': settings['ES_HOST']}
         ])
 
-    add_newsitem = ("INSERT INTO videolite "
-    "(title, downloadurl, created, domain, pageurl, info) "
-    "VALUES (%s, %s, %s, %s, %s, %s)")
+    add_newsitem = ("INSERT INTO videos (posterurl, title, releasedate, country, genre, language, \
+    subtitle, imdbscore, videoformat, videosize, filesize, runtime, director, cast, storyline, awards, \
+    downloadurl, created, domain, pageurl) VALUES \
+    (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)")
     
     def check_url_exist(self, url):
         if url == None:
             return True
         try:
             #check if item exist
-            self.cursor.execute("SELECT COUNT(*) FROM videolite where pageurl = '%s'"%url)
+            self.cursor.execute("SELECT COUNT(*) FROM videos where pageurl = '%s'"%url)
             if int(self.cursor.fetchone()[0]) > 0:
                 return True
             else:
@@ -53,13 +54,32 @@ class MysqlDBPipeline(object):
     
     def process_item(self, item, spider):
 
-        if isinstance(item, VideoLiteItem):
+        if isinstance(item, VideoItem):
             try:                
                 #insert new data
                 ts = time.time()
                 timestamp = datetime.datetime.fromtimestamp(ts).strftime('%Y-%m-%d %H:%M:%S')
-                data_newsitem = (item.get('title', ''), item.get('downloadurl', ''), \
-                timestamp, item.get('domain', ''), item.get('pageurl', ''), item.get('info', '') )
+                data_newsitem = (
+                    item.get('posterurl', ''), \
+                    item.get('title', ''), \
+                    item.get('releasedate', ''), \
+                    item.get('country', ''), \
+                    item.get('genre', ''), \
+                    item.get('language', ''), \
+                    item.get('subtitle', ''), \
+                    item.get('imdbscore', ''), \
+                    item.get('videoformat', ''), \
+                    item.get('videosize', ''), \
+                    item.get('filesize', ''), \
+                    item.get('runtime', ''), \
+                    item.get('director', ''), \
+                    item.get('cast', ''), \
+                    item.get('storyline', ''), \
+                    item.get('awards', ''), \
+                    item.get('downloadurl', ''), \
+                    timestamp, \
+                    item.get('domain', ''), \
+                    item.get('pageurl', ''))
 
                 self.cursor.execute(self.add_newsitem, data_newsitem)
                 self.conn.commit()
@@ -71,12 +91,26 @@ class MysqlDBPipeline(object):
             tses = datetime.datetime.fromtimestamp(ts).strftime('%Y-%m-%dT%H:%M:%SZ')
             doc = {
                 'id': self.cursor.lastrowid,
+                'posterurl': item.get('posterurl', ''),
                 'title': item.get('title', ''),
+                'releasedate': item.get('releasedate', ''),
+                'country': item.get('country', ''),
+                'genre': item.get('genre', ''),
+                'language': item.get('language', ''),
+                'subtitle': item.get('subtitle', ''),
+                'imdbscore': item.get('imdbscore', ''),
+                'videoformat': item.get('videoformat', ''),
+                'videosize': item.get('videosize', ''),
+                'filesize': item.get('filesize', ''),
+                'runtime': item.get('runtime', ''),
+                'director': item.get('director', ''),
+                'cast': item.get('cast', ''),
+                'storyline': item.get('storyline', ''),
+                'awards': item.get('awards', ''),
                 'downloadurl': item.get('downloadurl', ''),
                 'created': tses, # date datatype can be formatted when index time
                 'domain': item.get('domain', ''),
-                'pageurl': item.get('pageurl', ''),
-                'info': item.get('info', ''),
+                'pageurl': item.get('pageurl', '')
             }
             self.es.index(index="moviemix", doc_type='movie', body=doc)
         return item
