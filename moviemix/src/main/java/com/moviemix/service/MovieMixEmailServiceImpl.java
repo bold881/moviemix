@@ -19,7 +19,6 @@ import org.springframework.stereotype.Service;
 import org.thymeleaf.context.Context;
 import org.thymeleaf.spring4.SpringTemplateEngine;
 
-import com.moviemix.dao.SubscriberDAOImpl;
 import com.moviemix.model.Subscriber;
 import com.moviemix.model.Video;
 

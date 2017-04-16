@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <title>Subscribe For Latest Videos</title>
+	<meta charset="utf-8" />
+  </head>
+  <body>
+    <h1>Subscribe, Get Fresh Videos Easily and Free!</h1>
+    <form action="#" th:action="@{/subscribe.html}" th:object="${subscriber}" method="POST" >
+    	<label for="nickname" >NICKNAME</label>
+    	<input th:field="*{nickname}"/><br />
+    	
+    	<label for="email" >EMAIL</label>
+    	<input th:field="*{email}" /><br />
+    	<input type="submit"/>
+    </form>
+  </body>
+</html>

@@ -32,11 +32,11 @@ public class AppController {
 	@Autowired
 	SubscriberService subscriberService;
 	
-	@RequestMapping(value="/", method=RequestMethod.GET)
+	@GetMapping(value="/")
 	public String getHome(ModelMap model) {
+		model.addAttribute(new SearchKeyword());
 		return "home";
 	}
-	
 	
 	@RequestMapping(value= {"/videos"}, method = RequestMethod.GET)
 	public String listVideos(ModelMap model) {

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<title>VideoMix</title>
+</head>
+<body>
+<div id="header">
+	<div class="logo-text">
+		<a href="home.html"><span>VideoMix WELCOME!</span></a>
+	</div>
+	<div class="header-search">
+		<ul>
+			<li>
+				<form action="#" th:action="@{/search}" th:object="${searchKeyword}" method="post">
+					<input type="search" th:field="*{keyword}" />
+					<input type="submit" value="Submit" />
+				</form>
+			</li>
+			<li>
+				<a href="@{/subscribe}">Subscribe</a>
+			</li>
+		</ul>
+	</div>
+</div>
+<div>
+	<p>This site is full of fun!</p>
+</div>
+</body>
+</html>

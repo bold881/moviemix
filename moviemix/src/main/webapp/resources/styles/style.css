@@ -1,0 +1,29 @@
+@CHARSET "UTF-8";
+
+html {
+	background-color: #AFAFAF;
+}
+
+body {
+	margin: 0 auto;
+	background-color: #FF9500;
+	padding: 0 20px 20px 20px;
+	border: 5px solid black;
+}
+
+p {
+	color: red;
+}
+
+img {
+	display: block;
+	margin: 0 auto;
+}
+
+div.logo-text {
+	width: 450px;
+}
+
+div.header-search {
+	width: 500px;
+}

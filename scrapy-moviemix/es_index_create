@@ -1,30 +1,143 @@
-PUT moviemix 
+curl -XPUT "http://localhost:9200/moviemix" -d'
 {
+  "settings": {
+    "index": {
+      "number_of_shards": 5,
+      "number_of_replicas": 1
+    }
+  },
   "mappings": {
-    "movie": { 
-      "_all":       { "enabled": false  }, 
+    "movie": {
+      "_all": {
+        "enabled": true
+      },
       "properties": {
-        "id": {
-          "type": "long"
-        }, 
-        "title":    { 
-          "type": "text",
-          "analyzer": "ik_max_word"
-          }, 
-        "downloadurl": {
-          "type": "text",
-          "analyzer": "ik_max_word"
+        "posterurl": {
+          "type": "keyword"
         },
-        "created":     { 
-            "type": "date"
-        }, 
-        "domain":      { "type": "text" },
-        "pageurl": {"type": "text"},
-        "info": {
+        "title": {
           "type": "text",
-          "analyzer": "ik_max_word"
+          "analyzer": "ik_max_word",
+          "fields": {
+            "other": {
+              "type": "text",
+              "analyzer": "standard"
+            }
+          }
+        },
+        "releasedate": {
+          "type": "keyword"
+        },
+        "country": {
+          "type": "text",
+          "analyzer": "ik_max_word",
+          "fields": {
+            "other": {
+              "type": "text",
+              "analyzer": "standard"
+            }
+          }
+        },
+        "genre": {
+          "type": "text",
+          "analyzer": "ik_max_word",
+          "fields": {
+            "other": {
+              "type": "text",
+              "analyzer": "standard"
+            }
+          }
+        },
+        "language": {
+          "type": "text",
+          "analyzer": "ik_max_word",
+          "fields": {
+            "other": {
+              "type": "text",
+              "analyzer": "standard"
+            }
+          }
+        },
+        "subtitle": {
+          "type": "text",
+          "analyzer": "ik_max_word",
+          "fields": {
+            "other": {
+              "type": "text",
+              "analyzer": "standard"
+            }
+          }
+        },
+        "imdbscore": {
+          "type": "text"
+        },
+        "videoformat": {
+          "type": "text"
+        },
+        "videosize": {
+          "type": "keyword"
+        },
+        "filesize": {
+          "type": "keyword"
+        },
+        "runtime": {
+          "type": "keyword"
+        },
+        "director": {
+          "type": "text",
+          "analyzer": "ik_max_word",
+          "fields": {
+            "other": {
+              "type": "text",
+              "analyzer": "standard"
+            }
+          }
+        },
+        "cast": {
+          "type": "text",
+          "analyzer": "ik_max_word",
+          "fields": {
+            "other": {
+              "type": "text",
+              "analyzer": "standard"
+            }
+          }
+        },
+        "storyline": {
+          "type": "text",
+          "analyzer": "ik_max_word",
+          "fields": {
+            "other": {
+              "type": "text",
+              "analyzer": "standard"
+            }
+          }
+        },
+        "awards": {
+          "type": "text",
+          "analyzer": "ik_max_word",
+          "fields": {
+            "other": {
+              "type": "text",
+              "analyzer": "standard"
+            }
+          }
+        },
+        "downloadurl": {
+          "type": "keyword"
+        },
+        "created": {
+          "type": "date",
+          "format": "yyyy-MM-dd HH:mm:ss"
+        },
+        "domain": {
+          "type": "text",
+          "analyzer": "standard"
+        },
+        "pageurl": {
+          "type": "keyword"
         }
       }
     }
   }
-}
+}'
