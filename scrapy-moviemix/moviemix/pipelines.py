@@ -88,7 +88,7 @@ class MysqlDBPipeline(object):
                 print "DB Error %d: %s" % (e.args[0], e.args[1])
 
             # index document
-            tses = datetime.datetime.fromtimestamp(ts).strftime('%Y-%m-%dT%H:%M:%SZ')
+            #tses = datetime.datetime.fromtimestamp(ts).strftime('%Y-%m-%dT%H:%M:%SZ')
             doc = {
                 'id': self.cursor.lastrowid,
                 'posterurl': item.get('posterurl', ''),
@@ -108,7 +108,7 @@ class MysqlDBPipeline(object):
                 'storyline': item.get('storyline', ''),
                 'awards': item.get('awards', ''),
                 'downloadurl': item.get('downloadurl', ''),
-                'created': tses, # date datatype can be formatted when index time
+                'created': timestamp, # date datatype can be formatted when index time
                 'domain': item.get('domain', ''),
                 'pageurl': item.get('pageurl', '')
             }
