@@ -20,7 +20,7 @@ import org.thymeleaf.context.Context;
 import org.thymeleaf.spring4.SpringTemplateEngine;
 
 import com.moviemix.model.Subscriber;
-import com.moviemix.model.Video;
+import com.moviemix.model.VideoLite;
 
 @Service
 @PropertySource({"classpath:log4j.properties", "classpath:mail.properties"})
@@ -39,7 +39,7 @@ public class MovieMixEmailServiceImpl implements MovieMixEmailService {
 			LoggerFactory.getLogger(MovieMixEmailServiceImpl.class);
 	
 	@Override
-	public void sendFreshVideoEmail(List<Subscriber> lstSubscribers, List<Video> lstVideos) {
+	public void sendFreshVideoEmail(List<Subscriber> lstSubscribers, List<VideoLite> lstVideos) {
 		if(lstVideos.isEmpty() || lstSubscribers.isEmpty())
 			return;
 		for(Subscriber s : lstSubscribers) {
@@ -48,7 +48,7 @@ public class MovieMixEmailServiceImpl implements MovieMixEmailService {
 			message.setTo(s.getEmail());
 			message.setSubject("New Videos from VideoMix");
 			String mailContext = "";
-			for(Video video:lstVideos){
+			for(VideoLite video:lstVideos){
 				mailContext += video.toString();
 			}
 			message.setText(mailContext);
@@ -58,7 +58,7 @@ public class MovieMixEmailServiceImpl implements MovieMixEmailService {
 	}
 
 	@Override
-	public void sendRichFreshVideoEmail(List<Subscriber> lstSubscribers, List<Video> lstVideos) {
+	public void sendRichFreshVideoEmail(List<Subscriber> lstSubscribers, List<VideoLite> lstVideos) {
 		if(lstVideos.isEmpty() || lstSubscribers.isEmpty())
 			return;
 		String fromAddr = env.getProperty("mailserver.from");
@@ -91,7 +91,7 @@ public class MovieMixEmailServiceImpl implements MovieMixEmailService {
 	}
 
 	@Override
-	public void sendFreshVideoEmail(String to, List<Video> lstVideos) {
+	public void sendFreshVideoEmail(String to, List<VideoLite> lstVideos) {
 		SimpleMailMessage message = new SimpleMailMessage();
 		message.setFrom(env.getProperty("mailserver.from"));
 		message.setTo(to);

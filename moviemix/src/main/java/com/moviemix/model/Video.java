@@ -1,6 +1,6 @@
 package com.moviemix.model;
 
-import java.util.Date;
+import java.sql.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -8,10 +8,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
 
 @Entity
-@Table(name="videolite")
+@Table(name="videos")
 public class Video {
 	
 	@Id
@@ -19,13 +18,54 @@ public class Video {
 	@Column(name="id")
 	private Long id;
 	
+	@Column(name="posterurl")
+	private String posterURL;
+	
 	@Column(name="title")
 	private String title;
 	
-	@NotNull
+	@Column(name="releasedate")
+	private String releaseDate;
+	
+	@Column(name="country")
+	private String country;
+	
+	@Column(name="genre")
+	private String genre;
+	
+	@Column(name="subtitle")
+	private String subtitle;
+	
+	@Column(name="imdbscore")
+	private String imdbScore;
+	
+	@Column(name="videoformat")
+	private String videoFormat;
+	
+	@Column(name="videosize")
+	private String videoSize;
+	
+	@Column(name="filesize")
+	private String fileSize;
+	
+	@Column(name="runtime")
+	private String runtime;
+	
+	@Column(name="director")
+	private String director;
+	
+	@Column(name="cast")
+	private String cast;
+	
+	@Column(name="storyline")
+	private String storyline;
+	
+	@Column(name="awards")
+	private String awards;
+	
 	@Column(name="downloadurl")
-	private String downloadurl;
-
+	private String downloadURL;
+	
 	@Column(name="created")
 	private Date created;
 	
@@ -33,23 +73,7 @@ public class Video {
 	private String domain;
 	
 	@Column(name="pageurl")
-	private String pageurl;
-	
-	@Column(name="info")
-	private String info;
-	
-	public Video() {};
-	
-	public Video(Long id, String title, String downloadurl, 
-			Date created, String domain, String pageurl, String info) {
-		this.id = id;
-		this.title = title;
-		this.downloadurl = downloadurl;
-		this.created = created;
-		this.domain = domain;
-		this.pageurl = pageurl;
-		this.info = info;
-	};
+	private String pageURL;
 
 	public Long getId() {
 		return id;
@@ -57,6 +81,14 @@ public class Video {
 
 	public void setId(Long id) {
 		this.id = id;
+	}
+
+	public String getPosterURL() {
+		return posterURL;
+	}
+
+	public void setPosterURL(String posterURL) {
+		this.posterURL = posterURL;
 	}
 
 	public String getTitle() {
@@ -67,12 +99,116 @@ public class Video {
 		this.title = title;
 	}
 
-	public String getDownloadurl() {
-		return downloadurl;
+	public String getReleaseDate() {
+		return releaseDate;
 	}
 
-	public void setDownloadurl(String downloadurl) {
-		this.downloadurl = downloadurl;
+	public void setReleaseDate(String releaseDate) {
+		this.releaseDate = releaseDate;
+	}
+
+	public String getCountry() {
+		return country;
+	}
+
+	public void setCountry(String country) {
+		this.country = country;
+	}
+
+	public String getGenre() {
+		return genre;
+	}
+
+	public void setGenre(String genre) {
+		this.genre = genre;
+	}
+
+	public String getSubtitle() {
+		return subtitle;
+	}
+
+	public void setSubtitle(String subtitle) {
+		this.subtitle = subtitle;
+	}
+
+	public String getImdbScore() {
+		return imdbScore;
+	}
+
+	public void setImdbScore(String imdbScore) {
+		this.imdbScore = imdbScore;
+	}
+
+	public String getVideoFormat() {
+		return videoFormat;
+	}
+
+	public void setVideoFormat(String videoFormat) {
+		this.videoFormat = videoFormat;
+	}
+
+	public String getVideoSize() {
+		return videoSize;
+	}
+
+	public void setVideoSize(String videoSize) {
+		this.videoSize = videoSize;
+	}
+
+	public String getFileSize() {
+		return fileSize;
+	}
+
+	public void setFileSize(String fileSize) {
+		this.fileSize = fileSize;
+	}
+
+	public String getRuntime() {
+		return runtime;
+	}
+
+	public void setRuntime(String runtime) {
+		this.runtime = runtime;
+	}
+
+	public String getDirector() {
+		return director;
+	}
+
+	public void setDirector(String director) {
+		this.director = director;
+	}
+
+	public String getCast() {
+		return cast;
+	}
+
+	public void setCast(String cast) {
+		this.cast = cast;
+	}
+
+	public String getStoryline() {
+		return storyline;
+	}
+
+	public void setStoryline(String storyline) {
+		this.storyline = storyline;
+	}
+
+	public String getAwards() {
+		return awards;
+	}
+
+	public void setAwards(String awards) {
+		this.awards = awards;
+	}
+
+	public String getDownloadURL() {
+		return downloadURL;
+	}
+
+	public void setDownloadURL(String downloadURL) {
+		this.downloadURL = downloadURL;
 	}
 
 	public Date getCreated() {
@@ -91,25 +227,13 @@ public class Video {
 		this.domain = domain;
 	}
 
-	public String getPageurl() {
-		return pageurl;
+	public String getPageURL() {
+		return pageURL;
 	}
 
-	public void setPageurl(String pageurl) {
-		this.pageurl = pageurl;
-	}
-
-	public String getInfo() {
-		return info;
-	}
-
-	public void setInfo(String info) {
-		this.info = info;
+	public void setPageURL(String pageURL) {
+		this.pageURL = pageURL;
 	}
 	
-	@Override
-	public String toString() {
-		return this.title + this.created + '\n';
-	}
-
+	
 }
