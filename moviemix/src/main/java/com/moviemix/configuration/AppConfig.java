@@ -63,6 +63,7 @@ implements ApplicationContextAware{
 		templateResolver.setPrefix("/WEB-INF/views/");
 		templateResolver.setSuffix(".html");
 		templateResolver.setTemplateMode(TemplateMode.HTML);
+		templateResolver.setCharacterEncoding("UTF-8");
 		templateResolver.setCacheable(true);
 		return templateResolver;
 	}
@@ -80,6 +81,7 @@ implements ApplicationContextAware{
 		ThymeleafViewResolver viewResolver = new ThymeleafViewResolver();
 		viewResolver.setTemplateEngine(templateEngine());
 		viewResolver.setOrder(1);
+		viewResolver.setCharacterEncoding("UTF-8");
 		return viewResolver;
 	}
 	

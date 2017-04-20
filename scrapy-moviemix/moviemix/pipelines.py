@@ -90,7 +90,6 @@ class MysqlDBPipeline(object):
             # index document
             #tses = datetime.datetime.fromtimestamp(ts).strftime('%Y-%m-%dT%H:%M:%SZ')
             doc = {
-                'id': self.cursor.lastrowid,
                 'posterurl': item.get('posterurl', ''),
                 'title': item.get('title', ''),
                 'releasedate': item.get('releasedate', ''),
@@ -112,5 +111,5 @@ class MysqlDBPipeline(object):
                 'domain': item.get('domain', ''),
                 'pageurl': item.get('pageurl', '')
             }
-            self.es.index(index="moviemix", doc_type='movie', body=doc)
+            self.es.index(index="moviemix", doc_type='movie', id=self.cursor.lastrowid, body=doc)
         return item

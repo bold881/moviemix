@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.moviemix.model.SearchKeyword;
 import com.moviemix.model.Subscriber;
+import com.moviemix.service.ElasticsearchService;
 import com.moviemix.service.SubscriberService;
 import com.moviemix.service.VideoService;
 
@@ -31,6 +32,9 @@ public class AppController {
 	
 	@Autowired
 	SubscriberService subscriberService;
+	
+	@Autowired
+	ElasticsearchService elasticserchService;
 	
 	@GetMapping(value="/")
 	public String getHome(ModelMap model) {
@@ -87,7 +91,14 @@ public class AppController {
 	}
 	
 	@PostMapping("/search")
-	public String doSearch(@ModelAttribute SearchKeyword searchKeyword) {
+	public String doSearch(@Valid @ModelAttribute SearchKeyword searchKeyword,
+			ModelMap model) {
+		if(searchKeyword.getKeyword().isEmpty()) {
+			return "search";
+		}
+		
+		model.addAttribute("esVideos",
+				elasticserchService.doSearch(searchKeyword.getKeyword()));
 		return "search";
 	}
 }

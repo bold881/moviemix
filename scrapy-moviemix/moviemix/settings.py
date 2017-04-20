@@ -14,7 +14,7 @@ BOT_NAME = 'moviemix'
 SPIDER_MODULES = ['moviemix.spiders']
 NEWSPIDER_MODULE = 'moviemix.spiders'
 
-LOG_LEVEL = 'INFO'
+#LOG_LEVEL = 'INFO'
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
 #USER_AGENT = 'moviemix (+http://www.yourdomain.com)'

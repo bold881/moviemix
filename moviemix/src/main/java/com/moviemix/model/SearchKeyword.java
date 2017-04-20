@@ -1,7 +1,10 @@
 package com.moviemix.model;
 
+import javax.validation.constraints.NotNull;
+
 public class SearchKeyword {
 	
+	@NotNull
 	private String keyword;
 	
 	public SearchKeyword() {

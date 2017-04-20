@@ -5,9 +5,20 @@
 	<title>Search</title>
 </head>
 <body>
-	<form action="#" th:action="@{/search}" th:object="${searchKeyword}" method="post">
-		<input type="search" th:field="*{keyword}" />
-		<input type="submit" value="Submit" />
-	</form>
+	<div>
+		<form action="#" th:action="@{/search}" th:object="${searchKeyword}" method="post">
+			<input type="text" th:field="*{keyword}" />
+			<input type="submit" value="Submit" />
+		</form>
+	</div>
+	<div>
+		<table>
+			<tr th:each="esVideo : ${esVideos}">
+				<td th:text="${esVideo.title}"></td>
+				<td th:text="${esVideo.downloadUrl}"></td>
+				<td th:text="${esVideo.getHightlightFields()}"></td>
+			</tr>
+		</table>
+	</div>
 </body>
 </html>
