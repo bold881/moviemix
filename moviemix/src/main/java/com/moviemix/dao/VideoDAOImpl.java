@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.moviemix.model.Video;
 import com.moviemix.model.VideoLite;
 
 
@@ -46,10 +47,10 @@ public class VideoDAOImpl implements VideoDAO {
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<VideoLite> listVideos() {
+	public List<Video> listVideos() {
 		Session session = this.sessionFactory.getCurrentSession();
-		List<VideoLite> videoList = session.createQuery("from Video").list();
-		for(VideoLite v : videoList){
+		List<Video> videoList = session.createQuery("from Video").list();
+		for(Video v : videoList){
 			logger.info("Person List::" + v);
 		}
 		return videoList;
@@ -57,7 +58,7 @@ public class VideoDAOImpl implements VideoDAO {
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<VideoLite> listTodayVideos() {
+	public List<Video> listTodayVideos() {
 		Session session = this.sessionFactory.getCurrentSession();
 		Calendar cal = Calendar.getInstance();
         cal.setTime(new Date());
@@ -67,17 +68,17 @@ public class VideoDAOImpl implements VideoDAO {
         query.setInteger("month", cal.get(Calendar.MONTH)+1);
         query.setInteger("year", cal.get(Calendar.YEAR));
 
-		List<VideoLite> videoList = query.list();
-		for(VideoLite v : videoList){
+		List<Video> videoList = query.list();
+		for(Video v : videoList){
 			logger.info("Person List::" + v);
 		}
 		return videoList;
 	}
 
 	@Override
-	public VideoLite getVideoById(int id) {
+	public Video getVideoById(int id) {
 		Session session = this.sessionFactory.getCurrentSession();
-		VideoLite v = (VideoLite)session.load(VideoLite.class, new Long(id));
+		Video v = (Video)session.load(Video.class, new Long(id));
 		logger.info("Video loaded successfully, Video details="+v);
 		return v;
 	}

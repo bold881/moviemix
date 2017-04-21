@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.moviemix.dao.VideoDAO;
+import com.moviemix.model.Video;
 import com.moviemix.model.VideoLite;
 
 @Service
@@ -33,18 +34,18 @@ public class VideoServiceImpl implements VideoService {
 
 	@Override
 	@Transactional
-	public List<VideoLite> listVideos() {
+	public List<Video> listVideos() {
 		return this.videoDAO.listVideos();
 	}
 	
 	@Override
-	public List<VideoLite> listTodayVideos() {
+	public List<Video> listTodayVideos() {
 		return this.videoDAO.listTodayVideos();
 	}
 
 	@Override
 	@Transactional
-	public VideoLite getVideoById(int id) {
+	public Video getVideoById(int id) {
 		return this.videoDAO.getVideoById(id);
 	}
 

@@ -68,7 +68,7 @@ public class ElasticsearchServiceImpl implements ElasticsearchService {
 	
 	private static final int PAGE_SIZE = 100; 
 	
-	private static int pageLimit = 2;
+	private static int pageLimit = 3;
 	
 	
 	@Autowired
@@ -132,6 +132,11 @@ public class ElasticsearchServiceImpl implements ElasticsearchService {
 				esVideos.add(esVideo);
 			}
 			pageLimit--;
+			searchResponse = transportClient.prepareSearchScroll(searchResponse.getScrollId())
+					.setScroll(new TimeValue(SCROLL_KEEP_ALIVETIME))
+					.execute()
+					.actionGet();
+		
 		} while(searchResponse.getHits().getHits().length != 0 && pageLimit > 0);
 		
 		return esVideos;

@@ -17,6 +17,7 @@
 				<td th:text="${esVideo.title}"></td>
 				<td th:text="${esVideo.downloadUrl}"></td>
 				<td th:text="${esVideo.getHightlightFields()}"></td>
+				<td><a th:href="@{/video(id=${esVideo.id})}">...</a></td>
 			</tr>
 		</table>
 	</div>

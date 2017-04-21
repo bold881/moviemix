@@ -2,6 +2,7 @@ package com.moviemix.dao;
 
 import java.util.List;
 
+import com.moviemix.model.Video;
 import com.moviemix.model.VideoLite;
 
 public interface VideoDAO {
@@ -10,11 +11,11 @@ public interface VideoDAO {
 	
 	public void updateVideo(VideoLite v);
 	
-	public List<VideoLite> listVideos();
+	public List<Video> listVideos();
 	
-	public List<VideoLite> listTodayVideos();
+	public List<Video> listTodayVideos();
 	
-	public VideoLite getVideoById(int id);
+	public Video getVideoById(int id);
 	
 	public void removeVideo(int id);
 	

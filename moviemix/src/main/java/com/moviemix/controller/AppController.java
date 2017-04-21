@@ -13,12 +13,14 @@ import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-
+import org.springframework.web.bind.annotation.RequestParam;
 import com.moviemix.model.SearchKeyword;
 import com.moviemix.model.Subscriber;
+import com.moviemix.model.Video;
 import com.moviemix.service.ElasticsearchService;
 import com.moviemix.service.SubscriberService;
 import com.moviemix.service.VideoService;
@@ -100,5 +102,37 @@ public class AppController {
 		model.addAttribute("esVideos",
 				elasticserchService.doSearch(searchKeyword.getKeyword()));
 		return "search";
+	}
+	
+	@GetMapping("/video")
+	public String videoDetail(@RequestParam(value="id", required=false, defaultValue="") String id,
+			ModelMap model) {
+		
+		if(id==null || id.isEmpty()) {
+			return "redirect:/";
+		}
+		
+		Video video = videoService.getVideoById(Integer.parseInt(id));
+		if(video == null) {
+			return "redirect:/";
+		}
+		model.addAttribute("video", video);
+		return "video";
+	}
+	
+	@GetMapping("/video/{id}")
+	public String videoDetailPathVariable(@PathVariable("id") String id,
+			ModelMap model) {
+		
+		if(id==null || id.isEmpty()) {
+			return "redirect:/";
+		}
+		
+		Video video = videoService.getVideoById(Integer.parseInt(id));
+		if(video == null) {
+			return "redirect:/";
+		}
+		model.addAttribute("video", video);
+		return "video";
 	}
 }
