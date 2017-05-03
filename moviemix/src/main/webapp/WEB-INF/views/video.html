@@ -8,7 +8,21 @@
 	<div>
 		<img th:src="${video.posterURL}" alt="poster" >
 		<p th:text="${video.title}" />
+		<p th:text="${video.releaseDate}" />
+		<p th:text="${video.country}" />
+		<p th:text="${video.genre}" />
+		<p th:text="${video.subtitle}" />
+		<p th:text="${video.imdbScore}" />
+		<p th:text="${video.videoFormat}" />
+		<p th:text="${video.videoSize}" />
+		<p th:text="${video.fileSize}" />
+		<p th:text="${video.runtime}" />
+		<p th:text="${video.director}" />
+		<p th:text="${video.cast}" />
 		<p th:text="${video.storyline}" />
+		<p th:text="${video.awards}" />
+		<p th:text="'Download URL:' + ${video.downloadURL}" />
+		<p th:text="${video.created}" />
 	</div>
 </body>
 </html>
